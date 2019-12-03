@@ -51,21 +51,7 @@ public class Write_ApacheCommons {
         }
     }
 
-    @Benchmark
-    public void JPG(BenchmarkState images) {
-
-        int count = 0;
-
-        for (BufferedImage img : images.testImage) {
-            try {
-                final Map<String, Object> params = new HashMap<>();
-                Imaging.writeImage(img, new File(TestImageData.rootDir + "jpg/" + images.names[count] + "-apache.jpg"), ImageFormats.JPEG, params);
-                count++;
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
-        }
-    }
+    
 
     @Benchmark
     public void PNG(BenchmarkState images) {
