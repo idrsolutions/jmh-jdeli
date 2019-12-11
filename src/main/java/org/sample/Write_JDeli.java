@@ -82,7 +82,7 @@ public class Write_JDeli {
             Jpeg2000EncoderOptions options = new Jpeg2000EncoderOptions();
             options.setOutputSubtype(Jpeg2000OutputSubtype.JP2);
             for (BufferedImage img : images.testImage) {
-                JDeli.write(img, options, new File(TestImageData.rootDir+"jpeg2000/" + images.names[count] + "-jdeli.jp2"));
+                JDeli.write(img, options, new File(TestImageData.rootDir+"jpg2000/" + images.names[count] + "-jdeli.jp2"));
                 count++;
             }
 
@@ -100,7 +100,7 @@ public class Write_JDeli {
             Jpeg2000EncoderOptions options = new Jpeg2000EncoderOptions();
             options.setOutputSubtype(Jpeg2000OutputSubtype.JPX);
             for (BufferedImage img : images.testImage) {
-                JDeli.write(img, options, new File(TestImageData.rootDir+"jpeg2000/" + images.names[count] + "-jdeli.jpx"));
+                JDeli.write(img, options, new File(TestImageData.rootDir+"jpg2000/" + images.names[count] + "-jdeli.jpx"));
                 count++;
             }
 
