@@ -30,7 +30,6 @@ public class Write_ApacheCommons {
     static {
         new File(TestImageData.rootDir).mkdirs();
         new File(TestImageData.rootDir + "bmp").mkdirs();
-        new File(TestImageData.rootDir + "jpg").mkdirs();
         new File(TestImageData.rootDir + "png").mkdirs();
         new File(TestImageData.rootDir + "tif").mkdirs();
     }
