@@ -14,7 +14,6 @@ import org.openjdk.jmh.annotations.State;
 import org.apache.commons.imaging.ImageFormats;
 import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.ImagingConstants;
-import org.apache.commons.imaging.formats.png.PngConstants;
 import org.apache.commons.imaging.formats.tiff.constants.TiffConstants;
 
 public class Write_ApacheCommons {
@@ -62,24 +61,6 @@ public class Write_ApacheCommons {
                 final Map<String, Object> params = new HashMap<>();
 
                 Imaging.writeImage(img, new File(TestImageData.rootDir + "png/" + images.names[count] + "-apache.png"), ImageFormats.PNG, params);
-                count++;
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
-        }
-    }
-
-    @Benchmark
-    public void PNG_COMPRESSED(BenchmarkState images) {
-
-        int count = 0;
-
-        for (BufferedImage img : images.testImage) {
-            try {
-                final Map<String, Object> params = new HashMap<>();
-
-                params.put(ImagingConstants.PARAM_KEY_COMPRESSION, PngConstants.COMPRESSION_DEFLATE_INFLATE);
-                Imaging.writeImage(img, new File(TestImageData.rootDir + "png/" + images.names[count] + "-apache_compressed.png"), ImageFormats.PNG, params);
                 count++;
             } catch (Exception ex) {
                 System.out.println(ex);
