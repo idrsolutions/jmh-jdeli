@@ -19,11 +19,12 @@ class TestImageData {
     static BufferedImage[] testImage;
     static String[] names;
 
-    static String rootDir ="/Users/markee/Downloads/test/";
+    static String images_for_write_tests= "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-write-tests/";
+    static String rootDir ="/Users/markee/NetBeansProjects/jmh-jdeli/output/";
     
     static {
 
-            File[] listDirs = new File("/Users/markee/Downloads/5120x2880/8BIT/COLOR/").listFiles();
+            File[] listDirs = new File(images_for_write_tests).listFiles();
             
             testImage = new BufferedImage[listDirs.length];
             names = new String[listDirs.length];
@@ -31,7 +32,7 @@ class TestImageData {
             for(File f: listDirs){
                 try {
                     names[i]= f.getName();
-                    testImage[i] = ImageIO.read(new File("/Users/markee/Downloads/5120x2880/8BIT/COLOR/"+f.getName()));
+                    testImage[i] = ImageIO.read(new File(images_for_write_tests+f.getName()));                   
                     i++;
                 } catch (IOException ex) {
                     Logger.getLogger(TestImageData.class.getName()).log(Level.SEVERE, null, ex);
