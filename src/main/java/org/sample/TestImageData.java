@@ -17,27 +17,45 @@ import javax.imageio.ImageIO;
 class TestImageData {
 
     static BufferedImage[] testImage;
-    static String[] names;
+    static String[] write_images;
+    static String[] png_files;
 
-    static String images_for_write_tests= "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-write-tests/";
-    static String rootDir ="/Users/markee/NetBeansProjects/jmh-jdeli/output/";
-    
+    static String images_for_write_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-write-tests/";
+    static String png_images_for_read_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-png-read-tests/";
+    static String rootDir = "/Users/markee/NetBeansProjects/jmh-jdeli/output/";
+
     static {
 
-            File[] listDirs = new File(images_for_write_tests).listFiles();
-            
-            testImage = new BufferedImage[listDirs.length];
-            names = new String[listDirs.length];
-            int i=0;
-            for(File f: listDirs){
-                try {
-                    names[i]= f.getName();
-                    testImage[i] = ImageIO.read(new File(images_for_write_tests+f.getName()));                   
-                    i++;
-                } catch (IOException ex) {
-                    Logger.getLogger(TestImageData.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        File[] listDirs = new File(images_for_write_tests).listFiles();
+
+        testImage = new BufferedImage[listDirs.length];
+        write_images = new String[listDirs.length];
+        int i = 0;
+        for (File f : listDirs) {
+            try {
+                write_images[i] = f.getName();
+                testImage[i] = ImageIO.read(new File(images_for_write_tests + f.getName()));
+                i++;
+            } catch (IOException ex) {
+                Logger.getLogger(TestImageData.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+
+    }
+
+    private static String[] getFileListFromDir(final String path) {
+        File[] listDirs;
+        listDirs = new File(path).listFiles();
+        final String[] list_of_files = new String[listDirs.length];
+        int i = 0;
+        for (File f : listDirs) {
+
+            list_of_files[i] = path + f.getName();
+            i++;
+
+        }
+
+        return list_of_files;
     }
 
     static BufferedImage[] getImages() {
@@ -46,6 +64,19 @@ class TestImageData {
     }
 
     static String[] getNames() {
-        return names;
+        return write_images;
+    }
+
+    static String[] getReadTestFiles(org.sample.ImageType imageType) {
+
+        switch (imageType) {
+            case PNG:
+                if (png_files == null) {
+                    png_files = getFileListFromDir(png_images_for_read_tests);
+                }
+                return png_files;
+            default:
+                return null;
+        }
     }
 }
