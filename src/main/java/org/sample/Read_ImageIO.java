@@ -15,20 +15,20 @@ public class Read_ImageIO {
     public void PNG() {
 
         final String[] pngFiles = TestImageData.getReadTestFiles(ImageType.PNG);
-        int count=0;
+        int count = 0;
         for (String pngFile : pngFiles) {
             try {
-                BufferedImage img = ImageIO.read(new File(pngFile)); 
-                
-                if(img !=null) {
+                BufferedImage img = ImageIO.read(new File(pngFile));
+
+                if (img != null) {
                     count++;
                 }
-               // System.out.println(pngFile + " " +img);
+                // System.out.println(pngFile + " " +img);
             } catch (Exception ex) {
-               // System.out.println(ex);
+                // System.out.println(ex);
             }
         }
-        
+
         System.out.println("ImageIO reads " + count + " PNG files");
     }
 }
