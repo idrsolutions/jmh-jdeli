@@ -21,7 +21,12 @@ public class TestImageData {
     static String[] png_files;
 
     public static String images_for_write_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-write-tests/";
+    
+    /**
+     * good selection at http://www.schaik.com/pngsuite/
+     */
     public static String png_images_for_read_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-png-read-tests/";
+    
     public static String rootDir = "/Users/markee/NetBeansProjects/jmh-jdeli/output/";
 
     static {
