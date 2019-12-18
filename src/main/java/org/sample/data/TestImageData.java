@@ -1,7 +1,7 @@
 /*
  * shared test code
  */
-package org.sample;
+package org.sample.data;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,15 +14,15 @@ import javax.imageio.ImageIO;
  *
  * @author markee
  */
-class TestImageData {
+public class TestImageData {
 
     static BufferedImage[] testImage;
     static String[] write_images;
     static String[] png_files;
 
-    static String images_for_write_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-write-tests/";
-    static String png_images_for_read_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-png-read-tests/";
-    static String rootDir = "/Users/markee/NetBeansProjects/jmh-jdeli/output/";
+    public static String images_for_write_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-write-tests/";
+    public static String png_images_for_read_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-png-read-tests/";
+    public static String rootDir = "/Users/markee/NetBeansProjects/jmh-jdeli/output/";
 
     static {
 
@@ -58,16 +58,16 @@ class TestImageData {
         return list_of_files;
     }
 
-    static BufferedImage[] getImages() {
+    public static BufferedImage[] getImages() {
 
         return testImage;
     }
 
-    static String[] getNames() {
+    public static String[] getNames() {
         return write_images;
     }
 
-    static String[] getReadTestFiles(org.sample.ImageType imageType) {
+    public static String[] getReadTestFiles(org.sample.data.ImageType imageType) {
 
         switch (imageType) {
             case PNG:

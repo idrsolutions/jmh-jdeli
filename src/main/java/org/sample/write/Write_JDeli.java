@@ -2,8 +2,9 @@
  * Sample code to test all possible JDeli write options
  * using jmh. Requires JDeli trial or full jar as Maven dep
  */
-package org.sample;
+package org.sample.write;
 
+import org.sample.data.TestImageData;
 import com.idrsolutions.image.JDeli;
 import com.idrsolutions.image.bmp.options.BmpEncoderOptions;
 import com.idrsolutions.image.jpeg.options.JpegEncoderOptions;

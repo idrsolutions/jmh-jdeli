@@ -2,8 +2,9 @@
  * Sample code to test all possible ImageIO write options
  * using jmh.
  */
-package org.sample;
+package org.sample.write;
 
+import org.sample.data.TestImageData;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;

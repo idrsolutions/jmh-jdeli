@@ -5,8 +5,9 @@
  * This needs the PngEncoder jar from http://objectplanet.com/pngencoder/
  * to run so commented out by
  */
-package org.sample;
+package org.sample.write;
 
+import org.sample.data.TestImageData;
 import com.objectplanet.image.PngEncoder;
 import java.awt.image.BufferedImage;
 import java.io.File;
