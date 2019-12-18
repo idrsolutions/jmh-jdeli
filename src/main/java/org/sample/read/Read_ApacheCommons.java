@@ -17,20 +17,14 @@ public class Read_ApacheCommons {
     public void PNG() {
 
         final String[] pngFiles = TestImageData.getReadTestFiles(ImageType.PNG);
-        int count = 0;
-
+        
         for (String pngFile : pngFiles) {
             try {
                 BufferedImage img = Imaging.getBufferedImage(new File(pngFile));
-                if (img != null) {
-                    count++;
-                }
+                
             } catch (Exception ex) {
                 //   System.out.println(ex);
             }
         }
-
-        System.out.println("ApacheCommons reads " + count + " PNG files");
-
     }
 }
