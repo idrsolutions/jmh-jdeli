@@ -6,6 +6,9 @@ package org.sample.data;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -21,12 +24,12 @@ public class TestImageData {
     static String[] png_files;
 
     public static String images_for_write_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-write-tests/";
-    
+
     /**
      * good selection at http://www.schaik.com/pngsuite/
      */
     public static String png_images_for_read_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-png-read-tests/";
-    
+
     public static String rootDir = "/Users/markee/NetBeansProjects/jmh-jdeli/output/";
 
     static {
@@ -34,21 +37,37 @@ public class TestImageData {
         /**
          * data will be loaded on start of each warm-up iteration
          */
-        File[] listDirs = new File(images_for_write_tests).listFiles();
+        final File[] listDirs = new File(images_for_write_tests).listFiles();
+        final Map<String, BufferedImage> values = new HashMap<>();
 
-        testImage = new BufferedImage[listDirs.length];
-        write_images = new String[listDirs.length];
-        int i = 0;
         for (File f : listDirs) {
             try {
-                write_images[i] = f.getName();
-                testImage[i] = ImageIO.read(new File(images_for_write_tests + f.getName()));
-                i++;
+                BufferedImage img = ImageIO.read(new File(images_for_write_tests + f.getName()));
+
+                if (img != null) {
+                    values.put(f.getName(), img);
+                }
+
             } catch (IOException ex) {
                 Logger.getLogger(TestImageData.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
+        final int size = values.keySet().size();
+
+        testImage = new BufferedImage[size];
+        write_images = new String[size];
+
+        int i = 0;
+        String file;
+        Iterator<String> fileNames = values.keySet().iterator();
+        while (fileNames.hasNext()) {
+            file = fileNames.next();
+            write_images[i] = file;
+            testImage[i] = values.get(file);
+            i++;
+
+        }
     }
 
     private static String[] getFileListFromDir(final String path) {
