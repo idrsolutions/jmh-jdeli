@@ -9,25 +9,54 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import org.apache.commons.imaging.Imaging;
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 import org.sample.data.ImageType;
 import org.sample.data.TestImageData;
 
 /**
  * My test on PngSuite samples shows JDeli/ImageIO same speed and Apache over twice as slow
  * 
- * Results consistent if order of tests changed
  */
 public class PngReadComparison {
-    public static void main(String[] args) {
+    
+    @State(Scope.Benchmark)
+    public static class BenchmarkState {
+
+        final static String[] pngFiles = TestImageData.getReadTestFiles(ImageType.PNG);      
        
+    }
+    
+    @Benchmark
+    public void JDeli(BenchmarkState images) {
+       
+        for (String pngFile : images.pngFiles) {
+            try {
+                BufferedImage img = JDeli.read(new File(pngFile));
+            } catch (Exception ex) {
+                //   System.out.println(ex);
+            }
+        }
+    }
+
+    @Benchmark
+    public void Apache(BenchmarkState images) {
         
-        final String[] pngFiles = TestImageData.getReadTestFiles(ImageType.PNG);      
+        for (String pngFile : images.pngFiles) {
+            try {
+                BufferedImage img = Imaging.getBufferedImage(new File(pngFile));               
+                
+            } catch (Exception ex) {
+                //   System.out.println(ex);
+            }
+        }
+    }
+
+    @Benchmark
+    public void ImageIO(BenchmarkState images) {
         
-        long now;
-        
-        now = System.currentTimeMillis();
-        
-        for (String pngFile : pngFiles) {
+        for (String pngFile : images.pngFiles) {
             try {
                 BufferedImage img = ImageIO.read(new File(pngFile));
                 // System.out.println(pngFile + " " +img);
@@ -35,38 +64,5 @@ public class PngReadComparison {
                 // System.out.println(ex);
             }
         }
-        
-        System.out.println("ImageIO time taken = " +(System.currentTimeMillis()-now));
-        
-        now = System.currentTimeMillis();
-        
-        for (String pngFile : pngFiles) {
-            try {
-                BufferedImage img = Imaging.getBufferedImage(new File(pngFile));
-                
-            } catch (Exception ex) {
-                //   System.out.println(ex);
-            }
-        }
-        System.out.println("Apache time taken = " +(System.currentTimeMillis()-now));
-        
-        now = System.currentTimeMillis();
-        
-        
-        for (String pngFile : pngFiles) {
-            try {
-                BufferedImage img = JDeli.read(new File(pngFile));               
-            } catch (Exception ex) {
-                //   System.out.println(ex);
-            }
-        }
-        
-        System.out.println("JDeli time taken = " +(System.currentTimeMillis()-now));
-       
-        
-        
-        
-        
-        
     }
 }
