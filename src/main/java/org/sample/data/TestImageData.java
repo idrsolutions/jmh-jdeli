@@ -75,7 +75,7 @@ public class TestImageData {
     public static String[] getReadTestFiles(org.sample.data.ImageType imageType) {
 
         switch (imageType) {
-            case PNG:
+            case PNG: //should only be read on the reload warm-up iteration
                 if (png_files == null) {
                     png_files = getFileListFromDir(png_images_for_read_tests);
                 }
