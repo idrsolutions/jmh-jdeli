@@ -31,6 +31,9 @@ public class TestImageData {
 
     static {
 
+        /**
+         * data will be loaded on start of each warm-up iteration
+         */
         File[] listDirs = new File(images_for_write_tests).listFiles();
 
         testImage = new BufferedImage[listDirs.length];
