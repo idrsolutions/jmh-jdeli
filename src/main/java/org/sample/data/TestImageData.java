@@ -3,6 +3,7 @@
  */
 package org.sample.data;
 
+import com.idrsolutions.image.JDeli;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import org.sample.utils.ImageIOUtils;
 
 /**
  *
@@ -21,7 +23,7 @@ public class TestImageData {
 
     static BufferedImage[] testImage;
     static String[] write_images;
-    static String[] png_files;
+    static String[] png_files, tiff_files;
 
     public static String images_for_write_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-write-tests/";
 
@@ -29,12 +31,14 @@ public class TestImageData {
      * good selection at http://www.schaik.com/pngsuite/
      */
     public static String png_images_for_read_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-png-read-tests/";
+    public static String tiff_images_for_read_tests = "/Users/markee/NetBeansProjects/jmh-jdeli/testImages/images-for-tiff-read-tests/";
+
 
     public static String rootDir = "/Users/markee/NetBeansProjects/jmh-jdeli/output/";
 
     static {
 
-        /**
+        /*
          * data will be loaded on start of each warm-up iteration
          */
         final File[] listDirs = new File(images_for_write_tests).listFiles();
@@ -42,13 +46,13 @@ public class TestImageData {
 
         for (File f : listDirs) {
             try {
-                BufferedImage img = ImageIO.read(new File(images_for_write_tests + f.getName()));
+                BufferedImage img = JDeli.read(new File(images_for_write_tests + f.getName()));
 
                 if (img != null) {
                     values.put(f.getName(), img);
                 }
 
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(TestImageData.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -60,9 +64,8 @@ public class TestImageData {
 
         int i = 0;
         String file;
-        Iterator<String> fileNames = values.keySet().iterator();
-        while (fileNames.hasNext()) {
-            file = fileNames.next();
+        for (String s : values.keySet()) {
+            file = s;
             write_images[i] = file;
             testImage[i] = values.get(file);
             i++;
@@ -100,6 +103,11 @@ public class TestImageData {
             case PNG: //should only be read on the reload warm-up iteration
                 if (png_files == null) {
                     png_files = getFileListFromDir(png_images_for_read_tests);
+                }
+                return png_files;
+            case TIFF: //should only be read on the reload warm-up iteration
+                if (tiff_files == null) {
+                    tiff_files = getFileListFromDir(tiff_images_for_read_tests);
                 }
                 return png_files;
             default:

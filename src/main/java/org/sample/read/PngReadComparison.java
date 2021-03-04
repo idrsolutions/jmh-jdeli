@@ -14,6 +14,7 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.sample.data.ImageType;
 import org.sample.data.TestImageData;
+import org.sample.utils.ImageIOUtils;
 
 /**
  * My test on PngSuite samples shows JDeli/ImageIO same speed and Apache over twice as slow
@@ -58,7 +59,7 @@ public class PngReadComparison {
         
         for (String pngFile : images.pngFiles) {
             try {
-                BufferedImage img = ImageIO.read(new File(pngFile));
+                BufferedImage img = ImageIOUtils.read("png",new File(pngFile));
                 // System.out.println(pngFile + " " +img);
             } catch (Exception ex) {
                 // System.out.println(ex);

@@ -7,10 +7,10 @@ package org.sample.write;
 import org.sample.data.TestImageData;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
+import org.sample.utils.ImageIOUtils;
 
 public class Write_ImageIO {
 
@@ -36,7 +36,7 @@ public class Write_ImageIO {
 
         for (BufferedImage img : images.testImage) {
             try {
-                ImageIO.write(img, "JPG", new File(TestImageData.rootDir+"jpg/" + images.names[count] + "-imageio.jpg"));
+           //     ImageIOUtils.write(img, "JPG", new File(TestImageData.rootDir+"jpg/" + images.names[count] + "-imageio.jpg"));
                 count++;
             } catch (Exception ex) {
                 System.out.println(ex);
@@ -51,7 +51,7 @@ public class Write_ImageIO {
 
         for (BufferedImage img : images.testImage) {
             try {
-                ImageIO.write(img, "PNG", new File(TestImageData.rootDir+"png/" + images.names[count] + "-imageio.png"));
+                ImageIOUtils.write(img, "PNG", new File(TestImageData.rootDir+"png/" + images.names[count] + "-imageio.png"));
                 count++;
             } catch (Exception ex) {
                 System.out.println(ex);
@@ -66,7 +66,7 @@ public class Write_ImageIO {
 
         for (BufferedImage img : images.testImage) {
             try {
-                ImageIO.write(img, "JPG", new File(TestImageData.rootDir+"tif/" + images.names[count] + "-imageio.tif"));
+                ImageIOUtils.write(img, "JPG", new File(TestImageData.rootDir+"tif/" + images.names[count] + "-imageio.tif"));
                 count++;
             } catch (Exception ex) {
                 System.out.println(ex);
