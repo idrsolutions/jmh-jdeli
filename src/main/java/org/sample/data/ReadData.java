@@ -44,7 +44,6 @@ public class ReadData {
         type = imageType;
 
         if (images_to_read == null) {
-            System.out.println("read images for " + type);
             images_to_read = getFileListFromDir(images_for_read_tests + type + separator);
         }
 

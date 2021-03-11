@@ -28,12 +28,12 @@ public class PNG extends ReadTest {
     @Benchmark
     public void Apache(BenchmarkState images) {
 
-        for (String pngFile : images.filesToRead) {
+        for (String imageFile : images.filesToRead) {
             try {
-                BufferedImage img = Imaging.getBufferedImage(new File(pngFile));
+                BufferedImage img = Imaging.getBufferedImage(new File(imageFile));
 
             } catch (Exception ex) {
-                //   System.out.println(ex);
+                System.out.println(ex);
             }
         }
     }

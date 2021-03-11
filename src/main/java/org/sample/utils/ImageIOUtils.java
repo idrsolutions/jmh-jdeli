@@ -53,7 +53,7 @@ public class ImageIOUtils {
             final ImageReader reader = readers.next();
             if (!"IDRSolutions".equals(reader.getOriginatingProvider().getVendorName())) {
 
-                System.out.println("Using " + reader.getOriginatingProvider().getVendorName());
+                //System.out.println("Using " + reader.getOriginatingProvider().getVendorName());
                 try ( FileInputStream fos = new FileInputStream(imageIOFile);  ImageInputStream ios = ImageIO.createImageInputStream(fos)) {
                     reader.setInput(ios);
                     
