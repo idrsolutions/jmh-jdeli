@@ -3,15 +3,8 @@
  */
 package org.sample.data;
 
-import com.idrsolutions.image.JDeli;
-
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,14 +14,9 @@ public class ReadData {
 
     static String[] images_to_read;
 
-    public static String root ="/Users/markee/IdeaProjects/jmh-jdeli";
+    public static final String root =System.getProperty("user.dir");
 
-    public static String images_for_write_tests = root+"/testImages/images-for-write-tests/";
-
-    /**
-     * good selection at http://www.schaik.com/pngsuite/
-     */
-    public static String images_for_read_tests = root+"/testImages/images-for-read-tests/";
+    public static final String images_for_read_tests = root+"/testImages/images-for-read-tests/";
 
     private static String type;
 
@@ -37,9 +25,12 @@ public class ReadData {
         File[] listDirs = new File(path).listFiles();
 
         ArrayList<String> imageFiles = new ArrayList<>();
+        if(listDirs == null) {
+            throw new RuntimeException("No "+path+" directory with files");
+        }
         for (File f : listDirs) {
 
-            if(f.getName().endsWith(type.toString().toLowerCase())){
+            if(f.getName().endsWith(type)){
                 imageFiles.add(path + f.getName());
             }
         }
