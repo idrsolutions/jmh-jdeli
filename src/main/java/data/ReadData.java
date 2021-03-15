@@ -1,7 +1,7 @@
 /*
  * shared test code
  */
-package org.sample.data;
+package data;
 
 import java.io.File;
 import java.util.ArrayList;

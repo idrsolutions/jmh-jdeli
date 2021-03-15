@@ -1,7 +1,7 @@
 /*
  * Util class to bypass any JDeli plugin when we call ImageIO
  */
-package org.sample.utils;
+package utils;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,14 +13,14 @@ import javax.imageio.ImageReader;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageInputStream;
 import javax.imageio.stream.ImageOutputStream;
+
 import org.jpedal.utils.LogWriter;
 
 /**
- *
  * @author markee
  */
 public class ImageIOUtils {
-        
+
     public static void write(BufferedImage img, String ext, File imageIOFile) {
 
         //write out using first non-IDR writer found
@@ -31,7 +31,7 @@ public class ImageIOUtils {
             if (!"IDRSolutions".equals(writer.getOriginatingProvider().getVendorName())) {
 
                 //System.out.println("Using " + writer.getOriginatingProvider().getVendorName());
-                try ( FileOutputStream fos = new FileOutputStream(imageIOFile);  ImageOutputStream ios = ImageIO.createImageOutputStream(fos)) {
+                try (FileOutputStream fos = new FileOutputStream(imageIOFile); ImageOutputStream ios = ImageIO.createImageOutputStream(fos)) {
                     writer.setOutput(ios);
                     writer.write(img);
                 } catch (final Exception e) {
@@ -43,7 +43,7 @@ public class ImageIOUtils {
             }
         }
     }
-    
+
     public static BufferedImage read(String ext, File imageIOFile) {
 
         //write out using first non-IDR writer found
@@ -54,11 +54,11 @@ public class ImageIOUtils {
             if (!"IDRSolutions".equals(reader.getOriginatingProvider().getVendorName())) {
 
                 //System.out.println("Using " + reader.getOriginatingProvider().getVendorName());
-                try ( FileInputStream fos = new FileInputStream(imageIOFile);  ImageInputStream ios = ImageIO.createImageInputStream(fos)) {
+                try (FileInputStream fos = new FileInputStream(imageIOFile); ImageInputStream ios = ImageIO.createImageInputStream(fos)) {
                     reader.setInput(ios);
-                    
+
                     return reader.read(0);
-                    
+
                 } catch (final Exception e) {
                     e.printStackTrace(System.out);
                     System.out.println("ImageIO failed for " + imageIOFile);
@@ -67,7 +67,7 @@ public class ImageIOUtils {
                 imageWritten = true;
             }
         }
-        
+
         return null;
     }
 }

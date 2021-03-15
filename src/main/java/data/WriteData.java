@@ -1,9 +1,10 @@
 /*
  * shared test code
  */
-package org.sample.data;
+package data;
 
 import com.idrsolutions.image.JDeli;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -12,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author markee
  */
 public class WriteData {
@@ -21,11 +21,11 @@ public class WriteData {
     static String[] write_images;
     static String[] png_files;
 
-    public static String root ="/Users/markee/IdeaProjects/jmh-jdeli";
+    public static String root = "/Users/markee/IdeaProjects/jmh-jdeli";
 
-    public static String images_for_write_tests = root+"/testImages/images-for-write-tests/";
+    public static String images_for_write_tests = root + "/testImages/images-for-write-tests/";
 
-    public static String rootDir = root+"/output/";
+    public static String rootDir = root + "/output/";
 
     static {
 
