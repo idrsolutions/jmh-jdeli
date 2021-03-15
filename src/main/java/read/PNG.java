@@ -29,7 +29,7 @@ public class PNG extends ReadTest {
     /**
      * one test must be in this class to run correctly in IDEa
      *
-     * @param images
+     * @param images the data to use for testing
      */
 
     @Benchmark

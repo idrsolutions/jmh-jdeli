@@ -12,20 +12,17 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author markee
- */
 public class WriteData {
 
-    static BufferedImage[] testImage;
-    static String[] write_images;
+    static final BufferedImage[] testImage;
+    static final String[] write_images;
     static String[] png_files;
 
-    public static String root = "/Users/markee/IdeaProjects/jmh-jdeli";
+    public static final String root = "/Users/markee/IdeaProjects/jmh-jdeli";
 
-    public static String images_for_write_tests = root + "/testImages/images-for-write-tests/";
+    public static final String images_for_write_tests = root + "/testImages/images-for-write-tests/";
 
-    public static String rootDir = root + "/output/";
+    public static final String rootDir = root + "/output/";
 
     static {
 

@@ -8,7 +8,6 @@ public class SupportedImageFormats {
 
         switch (ReadData.getType()) {
             case "png":
-                return true;
             case "jpg":
                 return true;
             default:
@@ -20,7 +19,6 @@ public class SupportedImageFormats {
 
         switch (ReadData.getType()) {
             case "png":
-                return true;
             case "jpg":
                 return true;
             default:
@@ -32,7 +30,6 @@ public class SupportedImageFormats {
 
         switch (ReadData.getType()) {
             case "png":
-                return true;
             case "jpg":
                 return true;
             default:
