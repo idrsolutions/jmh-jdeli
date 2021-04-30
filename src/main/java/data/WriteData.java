@@ -18,11 +18,13 @@ public class WriteData {
     static final String[] write_images;
     static String[] png_files;
 
-    public static final String root = "/Users/markee/IdeaProjects/jmh-jdeli";
+    public static final String root = System.getProperty("user.dir");
 
-    public static final String images_for_write_tests = root + "/testImages/images-for-write-tests/";
+    public static final String separator = System.getProperty("file.separator");
 
-    public static final String rootDir = root + "/output/";
+    public static final String images_for_write_tests = root + separator + "testImages" + separator + "images-for-read-tests" + separator;
+
+    public static final String rootDir = root + separator + "output";
 
     static {
 
