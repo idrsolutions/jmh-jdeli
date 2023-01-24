@@ -9,12 +9,12 @@ import utils.SupportedImageFormats;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class TIFF extends ReadTest{
+public class GIF {
 
     @State(Scope.Benchmark)
     public static class BenchmarkState {
 
-        final static String[] filesToRead = ReadData.getReadTestFiles("tiff");
+        final static String[] filesToRead = ReadData.getReadTestFiles("gif");
 
     }
 
@@ -26,13 +26,12 @@ public class TIFF extends ReadTest{
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void JDeli(BenchmarkState images, Blackhole bh) {
+    public void JDeli(GIF.BenchmarkState images, Blackhole bh) {
 
         if (SupportedImageFormats.isSupportedByJDeli()) {
-            for (String tiffFile : images.filesToRead) {
+            for (String gifFile : images.filesToRead) {
                 try {
-
-                    BufferedImage img = JDeli.read(new File(tiffFile));
+                    BufferedImage img = JDeli.read(new File(gifFile));
                     bh.consume(img);
                 } catch (Exception ex) {
                     ex.printStackTrace();

@@ -9,30 +9,30 @@ import utils.SupportedImageFormats;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class TIFF extends ReadTest{
+public class WEBP extends ReadTest {
+
 
     @State(Scope.Benchmark)
     public static class BenchmarkState {
 
-        final static String[] filesToRead = ReadData.getReadTestFiles("tiff");
+        final static String[] filesToRead = ReadData.getReadTestFiles("webp");
 
     }
 
     /**
-     * one test must be in this class to run correctly in IDEa
+     * one test must be in this class to run correctly in IDEA
      *
      * @param images the data to use for testing
      */
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void JDeli(BenchmarkState images, Blackhole bh) {
+    public void JDeli(WEBP.BenchmarkState images, Blackhole bh) {
 
         if (SupportedImageFormats.isSupportedByJDeli()) {
-            for (String tiffFile : images.filesToRead) {
+            for (String imageFile : images.filesToRead) {
                 try {
-
-                    BufferedImage img = JDeli.read(new File(tiffFile));
+                    BufferedImage img = JDeli.read(new File(imageFile));
                     bh.consume(img);
                 } catch (Exception ex) {
                     ex.printStackTrace();

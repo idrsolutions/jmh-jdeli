@@ -8,16 +8,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import com.idrsolutions.image.JDeli;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 import data.ReadData;
+import org.openjdk.jmh.infra.Blackhole;
 import utils.SupportedImageFormats;
 
 /**
  *
  */
-public class PNG extends ReadTest {
+public class PNG {
 
     @State(Scope.Benchmark)
     public static class BenchmarkState {
@@ -33,14 +32,16 @@ public class PNG extends ReadTest {
      */
 
     @Benchmark
-    public void JDeli(PNG.BenchmarkState images) {
+    @BenchmarkMode(Mode.Throughput)
+    public void JDeli(BenchmarkState images, Blackhole bh) {
 
         if (SupportedImageFormats.isSupportedByJDeli()) {
             for (String pngFile : images.filesToRead) {
                 try {
                     BufferedImage img = JDeli.read(new File(pngFile));
-                } catch (Exception ex) {
-                    //   System.out.println(ex);
+                    bh.consume(img);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }

@@ -1,3 +1,7 @@
+/*
+ * Sample code to test all possible JDeli write options
+ * using jmh. Requires JDeli trial or full jar as Maven dep
+ */
 package read;
 
 import com.idrsolutions.image.JDeli;
@@ -8,13 +12,17 @@ import utils.SupportedImageFormats;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
-public class TIFF extends ReadTest{
+/**
+ *
+ */
+public class BMP extends ReadTest {
 
     @State(Scope.Benchmark)
     public static class BenchmarkState {
 
-        final static String[] filesToRead = ReadData.getReadTestFiles("tiff");
+        final static String[] filesToRead = ReadData.getReadTestFiles("bmp");
 
     }
 
@@ -26,13 +34,12 @@ public class TIFF extends ReadTest{
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void JDeli(BenchmarkState images, Blackhole bh) {
+    public void JDeli(BMP.BenchmarkState images, Blackhole bh) {
 
         if (SupportedImageFormats.isSupportedByJDeli()) {
-            for (String tiffFile : images.filesToRead) {
+            for (String bmpFile : images.filesToRead) {
                 try {
-
-                    BufferedImage img = JDeli.read(new File(tiffFile));
+                    BufferedImage img = JDeli.read(new File(bmpFile));
                     bh.consume(img);
                 } catch (Exception ex) {
                     ex.printStackTrace();

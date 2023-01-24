@@ -1,39 +1,44 @@
+/*
+ * Sample code to test all possible JDeli write options
+ * using jmh. Requires JDeli trial or full jar as Maven dep
+ */
 package read;
 
 import com.idrsolutions.image.JDeli;
-import data.ReadData;
 import org.openjdk.jmh.annotations.*;
-import org.openjdk.jmh.infra.Blackhole;
+import data.ReadData;
 import utils.SupportedImageFormats;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Arrays;
 
-public class TIFF extends ReadTest{
+/**
+ *
+ */
+public class JPEG extends ReadTest {
 
     @State(Scope.Benchmark)
     public static class BenchmarkState {
 
-        final static String[] filesToRead = ReadData.getReadTestFiles("tiff");
+        final String[] filesToRead = Arrays.stream(ReadData.getReadTestFiles("jpeg")).toArray(String[]::new);
 
     }
 
     /**
-     * one test must be in this class to run correctly in IDEa
+     * one test must be in this class to run correctly in IDEA
      *
      * @param images the data to use for testing
      */
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void JDeli(BenchmarkState images, Blackhole bh) {
+    public void JDeli(JPEG.BenchmarkState images) {
 
         if (SupportedImageFormats.isSupportedByJDeli()) {
-            for (String tiffFile : images.filesToRead) {
+            for (String jpgFile : images.filesToRead) {
                 try {
-
-                    BufferedImage img = JDeli.read(new File(tiffFile));
-                    bh.consume(img);
+                    BufferedImage img = JDeli.read(new File(jpgFile));
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
