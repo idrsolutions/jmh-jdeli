@@ -7,10 +7,9 @@ package write;
 import com.idrsolutions.image.JDeli;
 import com.idrsolutions.image.jpeg.options.JpegEncoderOptions;
 import data.WriteData;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 import utils.ImageIOUtils;
+import utils.SupportedImageFormats;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,7 +19,7 @@ public class JPG {
     @State(Scope.Benchmark)
     public static class BenchmarkState {
 
-        final BufferedImage[] testImage = WriteData.getImages();
+        final BufferedImage[] testImage = WriteData.setTestImages();
         final String[] names = WriteData.getNames();
 
     }
@@ -32,33 +31,37 @@ public class JPG {
 
     @Benchmark
     public void JDeli(BenchmarkState images) {
+        if (SupportedImageFormats.isWritingSupportedByJDeli("jpg")) {
 
-        int count = 0;
+            int count = 0;
 
-        try {
-            JpegEncoderOptions options = new JpegEncoderOptions();
+            try {
+                JpegEncoderOptions options = new JpegEncoderOptions();
 
-            for (BufferedImage img : images.testImage) {
-                JDeli.write(img, options, new File(WriteData.rootDir + "jpg/" + images.names[count] + "-jdeli.jpg"));
-                count++;
+                for (BufferedImage img : images.testImage) {
+                    JDeli.write(img, options, new File(WriteData.rootDir + "jpg/" + images.names[count].substring(0, images.names[count].indexOf('.')) + "-jdeli.jpg"));
+                    count++;
+                }
+
+            } catch (Exception ex) {
+                 ex.printStackTrace();
             }
-
-        } catch (Exception ex) {
-            System.out.println(ex);
         }
     }
 
     @Benchmark
     public void ImageIO(BenchmarkState images) {
+        if (SupportedImageFormats.isWritingSupportedByImageIO("jpg")) {
 
-        int count = 0;
+            int count = 0;
 
-        for (BufferedImage img : images.testImage) {
-            try {
-                ImageIOUtils.write(img, "JPG", new File(WriteData.rootDir+"jpg/" + images.names[count] + "-imageio.jpg"));
-                count++;
-            } catch (Exception ex) {
-                System.out.println(ex);
+            for (BufferedImage img : images.testImage) {
+                try {
+                    ImageIOUtils.write(img, "JPG", new File(WriteData.rootDir + "jpg/" + images.names[count].substring(0, images.names[count].indexOf('.')) + "-imageio.jpg"));
+                    count++;
+                } catch (Exception ex) {
+                     ex.printStackTrace();
+                }
             }
         }
     }
