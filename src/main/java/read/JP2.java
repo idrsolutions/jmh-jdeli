@@ -30,7 +30,7 @@ public class JP2 extends ReadTest {
     @BenchmarkMode(Mode.Throughput)
     public void JDeli(BenchmarkState images, Blackhole bh) {
 
-        if (SupportedImageFormats.isSupportedByJDeli()) {
+        if (SupportedImageFormats.isReadingSupportedByJDeli()) {
             for (String imageFile : images.filesToRead) {
                 try {
                     BufferedImage img = JDeli.read(new File(imageFile));

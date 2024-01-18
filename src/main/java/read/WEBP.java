@@ -27,9 +27,9 @@ public class WEBP extends ReadTest {
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void JDeli(WEBP.BenchmarkState images, Blackhole bh) {
+    public void JDeli(read.WEBP.BenchmarkState images, Blackhole bh) {
 
-        if (SupportedImageFormats.isSupportedByJDeli()) {
+        if (SupportedImageFormats.isReadingSupportedByJDeli()) {
             for (String imageFile : images.filesToRead) {
                 try {
                     BufferedImage img = JDeli.read(new File(imageFile));

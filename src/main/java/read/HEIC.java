@@ -35,7 +35,7 @@ public class HEIC extends ReadTest {
     @BenchmarkMode(Mode.Throughput)
     public void JDeli(HEIC.BenchmarkState images, Blackhole bh) {
 
-        if (SupportedImageFormats.isSupportedByJDeli()) {
+        if (SupportedImageFormats.isReadingSupportedByJDeli()) {
             for (String heicFile : images.filesToRead) {
                 try {
                     BufferedImage img = JDeli.read(new File(heicFile));

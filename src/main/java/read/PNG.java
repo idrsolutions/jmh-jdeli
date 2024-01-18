@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import com.idrsolutions.image.JDeli;
+import org.apache.commons.imaging.Imaging;
 import org.openjdk.jmh.annotations.*;
 import data.ReadData;
 import org.openjdk.jmh.infra.Blackhole;
@@ -35,13 +36,29 @@ public class PNG {
     @BenchmarkMode(Mode.Throughput)
     public void JDeli(BenchmarkState images, Blackhole bh) {
 
-        if (SupportedImageFormats.isSupportedByJDeli()) {
+        if (SupportedImageFormats.isReadingSupportedByJDeli()) {
             for (String pngFile : images.filesToRead) {
                 try {
                     BufferedImage img = JDeli.read(new File(pngFile));
                     bh.consume(img);
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.AverageTime)
+    public void Apache(read.PNG.BenchmarkState images, Blackhole bh) {
+
+        if (SupportedImageFormats.isReadingSupportedByApache()) {
+            for (String imageFile : images.filesToRead) {
+                try {
+                    BufferedImage img = Imaging.getBufferedImage(new File(imageFile));
+                    bh.consume(img);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         }
