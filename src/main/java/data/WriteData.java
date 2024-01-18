@@ -21,9 +21,11 @@ public class WriteData {
 
     public static final String separator = System.getProperty("file.separator");
 
-    public static final String images_for_write_tests = root + separator + "testImages" + separator + "images-for-read-tests" + separator + "writing" + separator;
+    public static final String images_for_write_tests = root + separator + "testImages" + separator + "images-for-write-tests" + separator;
 
     public static final String rootDir = root + separator + "output" + separator;
+
+    public static String type;
 
     public static BufferedImage[] setTestImages(){
 
@@ -75,5 +77,7 @@ public class WriteData {
     public static String[] getNames() {
         return write_images;
     }
+
+    public static String getType(){return type;}
 
 }

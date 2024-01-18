@@ -1,11 +1,10 @@
 package utils;
 
 import data.ReadData;
-import data.WriteData;
 
 public class SupportedImageFormats {
 
-    public static boolean isSupportedByApache() {
+    public static boolean isReadingSupportedByApache() {
 
         switch (ReadData.getType()) {
             case "png":
@@ -20,7 +19,7 @@ public class SupportedImageFormats {
         }
     }
 
-    public static boolean isSupportedByJDeli() {
+    public static boolean isReadingSupportedByJDeli() {
 
         switch (ReadData.getType()) {
             case "bmp":
@@ -31,13 +30,14 @@ public class SupportedImageFormats {
             case "jpeg":
             case "png":
             case "tiff":
+            case "webp":
                 return true;
             default:
                 return false;
         }
     }
 
-    public static boolean isSupportedByImageIO() {
+    public static boolean isReadingSupportedByImageIO() {
 
         switch (ReadData.getType()) {
             case "bmp":
@@ -46,6 +46,7 @@ public class SupportedImageFormats {
             case "jpeg":
             case "png":
             case "tiff":
+            case "webp":
                 return true;
             default:
                 return false;
@@ -76,6 +77,7 @@ public class SupportedImageFormats {
             case "jpeg":
             case "png":
             case "tiff":
+            case "webp":
                 return true;
             default:
                 return false;
@@ -92,6 +94,7 @@ public class SupportedImageFormats {
             case "jpeg":
             case "png":
             case "tiff":
+            case "webp":
                 return true;
             default:
                 return false;

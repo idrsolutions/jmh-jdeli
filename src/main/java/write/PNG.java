@@ -8,7 +8,6 @@ import com.idrsolutions.image.JDeli;
 import com.idrsolutions.image.png.options.PngCompressionFormat;
 import com.idrsolutions.image.png.options.PngEncoderOptions;
 import data.WriteData;
-import org.apache.commons.imaging.ImageFormat;
 import org.apache.commons.imaging.ImageFormats;
 import org.apache.commons.imaging.Imaging;
 import org.openjdk.jmh.annotations.*;
@@ -117,7 +116,7 @@ public class PNG {
             int count = 0;
             for (BufferedImage img : images.testImage) {
                 try {
-                    Imaging.writeImage(img, new File(WriteData.rootDir + "png/" + images.names[count].substring(0, images.names[count].indexOf('.')) + "-apache.png"), ImageFormats.PNG,null);
+                    Imaging.writeImage(img, new File(WriteData.rootDir + "png/" + images.names[count].substring(0, images.names[count].indexOf('.')) + "-apache.png"), ImageFormats.PNG);
                     count++;
                 } catch (Exception ex) {
                      ex.printStackTrace();
