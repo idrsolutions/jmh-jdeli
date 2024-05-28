@@ -1,3 +1,7 @@
+/*
+ * Sample code to test all possible JDeli write options
+ * using jmh. Requires JDeli trial or full jar as Maven dep
+ */
 package read;
 
 import com.idrsolutions.image.JDeli;
@@ -10,12 +14,15 @@ import utils.SupportedImageFormats;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class TIFF extends ReadTest{
+/**
+ *
+ */
+public class BMP extends ReadTest {
 
     @State(Scope.Benchmark)
     public static class BenchmarkState {
 
-        final static String[] filesToRead = ReadData.getReadTestFiles("tiff");
+        final static String[] filesToRead = ReadData.getReadTestFiles("bmp");
 
     }
 
@@ -27,13 +34,12 @@ public class TIFF extends ReadTest{
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void JDeli(BenchmarkState images, Blackhole bh) {
+    public void JDeli(read.BMP.BenchmarkState images, Blackhole bh) {
 
         if (SupportedImageFormats.isReadingSupportedByJDeli()) {
-            for (String tiffFile : images.filesToRead) {
+            for (String bmpFile : images.filesToRead) {
                 try {
-
-                    BufferedImage img = JDeli.read(new File(tiffFile));
+                    BufferedImage img = JDeli.read(new File(bmpFile));
                     bh.consume(img);
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -44,7 +50,7 @@ public class TIFF extends ReadTest{
 
     @Benchmark
     @BenchmarkMode(Mode.AverageTime)
-    public void Apache(read.TIFF.BenchmarkState images, Blackhole bh) {
+    public void Apache(read.BMP.BenchmarkState images, Blackhole bh) {
 
         if (SupportedImageFormats.isReadingSupportedByApache()) {
             for (String imageFile : images.filesToRead) {

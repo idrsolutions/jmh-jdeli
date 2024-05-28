@@ -14,19 +14,20 @@ import java.util.logging.Logger;
 
 public class WriteData {
 
-    static final BufferedImage[] testImage;
-    static final String[] write_images;
-    static String[] png_files;
+    static BufferedImage[] testImage;
+    static String[] write_images;
 
     public static final String root = System.getProperty("user.dir");
 
     public static final String separator = System.getProperty("file.separator");
 
-    public static final String images_for_write_tests = root + separator + "testImages" + separator + "images-for-read-tests" + separator;
+    public static final String images_for_write_tests = root + separator + "testImages" + separator + "images-for-write-tests" + separator;
 
-    public static final String rootDir = root + separator + "output";
+    public static final String rootDir = root + separator + "output" + separator;
 
-    static {
+    public static String type;
+
+    public static BufferedImage[] setTestImages(){
 
         /*
          * data will be loaded on start of each warm-up iteration
@@ -34,7 +35,11 @@ public class WriteData {
         final File[] listDirs = new File(images_for_write_tests).listFiles();
         final Map<String, BufferedImage> values = new HashMap<>();
 
+        if (listDirs == null) {
+            throw new RuntimeException("No directory with files");
+        }
         for (File f : listDirs) {
+            if (!f.getName().endsWith(".txt")) {
             try {
                 BufferedImage img = JDeli.read(new File(images_for_write_tests + f.getName()));
 
@@ -44,7 +49,7 @@ public class WriteData {
 
             } catch (Exception ex) {
                 Logger.getLogger(WriteData.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }}
         }
 
         final int size = values.keySet().size();
@@ -61,6 +66,7 @@ public class WriteData {
             i++;
 
         }
+         return testImage;
     }
 
     public static BufferedImage[] getImages() {
@@ -71,5 +77,7 @@ public class WriteData {
     public static String[] getNames() {
         return write_images;
     }
+
+    public static String getType(){return type;}
 
 }
