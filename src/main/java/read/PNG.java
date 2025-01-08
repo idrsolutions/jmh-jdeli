@@ -49,7 +49,7 @@ public class PNG {
     }
 
     @Benchmark
-    @BenchmarkMode(Mode.AverageTime)
+    @BenchmarkMode(Mode.Throughput)
     public void Apache(read.PNG.BenchmarkState images, Blackhole bh) {
 
         if (SupportedImageFormats.isReadingSupportedByApache()) {

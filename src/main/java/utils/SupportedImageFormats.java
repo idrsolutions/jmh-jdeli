@@ -27,6 +27,7 @@ public class SupportedImageFormats {
             case "heic":
             case "jp2":
             case "jpg":
+            case "jxl":
             case "jpeg":
             case "png":
             case "tiff":
@@ -42,8 +43,10 @@ public class SupportedImageFormats {
         switch (ReadData.getType()) {
             case "bmp":
             case "gif":
+            case "jp2":
             case "jpg":
             case "jpeg":
+            case "jxl":
             case "png":
             case "tiff":
             case "webp":

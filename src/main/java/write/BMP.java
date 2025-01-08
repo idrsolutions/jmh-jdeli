@@ -73,7 +73,7 @@ public class BMP {
 
         try {
             for (BufferedImage img : images.testImage) {
-                Imaging.writeImage(img, new File(WriteData.rootDir + "bmp/" + images.names[count].substring(0, images.names[count].indexOf('.')) + "-jdeli.bmp"), ImageFormats.BMP);
+                Imaging.writeImage(img, new File(WriteData.rootDir + "bmp/" + images.names[count].substring(0, images.names[count].indexOf('.')) + "-apache.bmp"), ImageFormats.BMP);
                 count++;
             }
 

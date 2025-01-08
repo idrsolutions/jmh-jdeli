@@ -6,8 +6,6 @@ package write;
 
 import com.idrsolutions.image.JDeli;
 import com.idrsolutions.image.gif.options.GifEncoderOptions;
-import com.idrsolutions.image.png.options.PngCompressionFormat;
-import com.idrsolutions.image.png.options.PngEncoderOptions;
 import data.WriteData;
 import org.apache.commons.imaging.ImageFormats;
 import org.apache.commons.imaging.Imaging;
@@ -26,7 +24,7 @@ public class GIF {
     @State(Scope.Benchmark)
     public static class BenchmarkState {
 
-        final BufferedImage[] testImage = WriteData.setTestImages();;
+        final BufferedImage[] testImage = WriteData.setTestImages();
         final String[] names = WriteData.getNames();
 
     }
@@ -63,6 +61,24 @@ public class GIF {
 
             } catch (Exception ex) {
                  ex.printStackTrace();
+            }
+        }
+    }
+
+    @Benchmark
+    @BenchmarkMode(Mode.Throughput)
+    public void Apache(BMP.BenchmarkState images) {
+        if (SupportedImageFormats.isWritingSupportedByApache("gif")) {
+            int count = 0;
+
+            try {
+                for (BufferedImage img : images.testImage) {
+                    Imaging.writeImage(img, new File(WriteData.rootDir + "gif/" + images.names[count].substring(0, images.names[count].indexOf('.')) + "-apache.gif"), ImageFormats.GIF);
+                    count++;
+                }
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
     }
